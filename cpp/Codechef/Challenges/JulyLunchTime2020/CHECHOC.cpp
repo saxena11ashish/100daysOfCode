@@ -6,7 +6,9 @@ int main(){
         int n,m,x,y;
         cin>>n>>m>>x>>y;
         int ans=0;
-        if(2*x<=y)
+        if(n==1 && m==1)
+            ans=x;
+        else if(2*x<=y)
             ans=m*n*x;
         else{
             ans=(m*n)/2;
@@ -18,23 +20,3 @@ int main(){
     }
     return 0;
 }
-/*#include<bits/stdc++.h>
-using namespace std;
-int main(){
-    int t;cin>>t;
-    while(t--){
-        int n,m,x,y;
-        int ans=0;
-        cin>>n>>m>>x>>y;
-        if(2*x>y){
-            ans=((m*n)/2)*y;
-            if((m*n)%2==1)
-                 ans+=min(x,y);
-        }
-        else
-            ans=m*n*x;
-        cout<<ans<<endl;
-    }
-    return 0;
-}
-*/
