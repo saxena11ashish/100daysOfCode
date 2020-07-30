@@ -8,7 +8,7 @@ int main(){
         for(    ;i<=n/4;i++)ans+=pow(2,i);
         for(    ;i<=(3*n)/4;i++)ans-=pow(2,i);
         for(    ;i<=n;i++)ans+=pow(2,i);
-        cout<<ans;
+        cout<<abs(ans)<<endl;
     }
     return 0;
 }
