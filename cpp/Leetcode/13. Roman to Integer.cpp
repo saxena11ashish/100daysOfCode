@@ -1,26 +1,17 @@
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
-        if(s.size()<=1)return s.size();
-        int i=0,size=1,maxSize=1;
-//        bitset<256>present;   //memory wise better to use
-        bool present[256]={0};  //time wise better to use
-        present[int(s[0])]=1;
-        for(int j=1;j<s.size();j++){
-            int character = int(s[j]);
-            if(present[character]){
-                while(s[i]!=s[j]){
-                    present[int(s[i])]=0;
-                    i++;size--;    
-                }
+    int romanToInt(string s) {
+        unordered_map<char,int> m = {{'I',1},{'V',5},{'X',10},{'L',50},{'C',100},{'D',500},{'M',1000}};
+        int ans = 0;
+        for(int i=0;i<s.size();i++){
+            if(m[s[i]]>=m[s[i+1]]){
+                ans+=m[s[i]];
+            }
+            else {
+                ans+=(m[s[i+1]]-m[s[i]]);
                 i++;
             }
-            else{
-                size++;
-                present[character]=1;
-                maxSize = max(size,maxSize);
-            }
         }
-        return maxSize;
+        return ans;
     }
-};
+}; 
