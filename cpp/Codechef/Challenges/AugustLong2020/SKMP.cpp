@@ -1,61 +1,48 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    //string asa = string(5,'i');   //repeat character n times
-    int i=0;
-    string temp= string(3,char(i+97));
-    cout<<temp;
     string s,p;
     int t;cin>>t;
     cin.ignore();
     while(t--){
         cin>>s>>p;
-        string stringArray[26];
-        bool patternPlaced = false;
-        for(char &c: s)stringArray[c-97]+=c;
-        for(char &c: p)stringArray[c-97].pop_back();
-        string ans="";
+        string ans = "";
+        int a[26]={0}, patternFirstAlphaCount=1;
+        bool patternPlaced = false, p0IsSmallest = true;
+        for(char &c: s)a[c-97]++;
+        for(char &c: p)a[c-97]--;
+        for(int i=1;i<p.size();i++){
+            if(p[i]==p[0])
+                patternFirstAlphaCount++;
+            else{
+                if(p[i] < p[0])
+                    p0IsSmallest = false;
+                break;
+            }
+        }
         for(int i=0;i<26;i++){
+            string temp= string(a[i],char(i+97));  //makes a string with char = i+97 && count = a[i]
             if(!patternPlaced){
-                if(stringArray[i][0]==p[0]){
-                    if(stringArray[i].size() >= p.size()){
-                        ans+=p;
-                        ans+=stringArray[i];
-                        patternPlaced = true;
-                    }
-                    else{
-                        bool patternFirst=true;
-                        for(int ii=1;ii<=stringArray[i].size();ii++){
-                            if(p[ii]==stringArray[i][0]){}
-                            else if(p[ii]<stringArray[i][0]){
-                                break;
-                            }
-                            else{
-                                patternFirst = false;
-                                break;
-                            }
-                        }
-                        if(patternFirst)
-                            ans = ans+p+stringArray[i];
-                        else
-                            ans = ans+stringArray[i]+p;
-                        patternPlaced = true;
-                    }
-                }
-                else if(stringArray[i] < p)
-                    ans+=stringArray[i];
-                else{
+                if(p[0]-97 > i)
+                    ans+=temp;
+                else if(p[0]-97 < i){
+                    ans = ans+ p + temp;
                     patternPlaced = true;
-                    ans+=p;
-                    ans+=stringArray[i];
+                }
+                else{
+                    if(p0IsSmallest)
+                        ans = ans + temp + p;
+                    else
+                        ans = ans+ p + temp;
+                    patternPlaced = true;
                 }
             }
             else
-                ans+=stringArray[i];
+                ans+=temp;
         }
-        if(!patternPlaced)ans+=p;
+        if(!patternPlaced)
+            ans+=p;
         cout<<ans<<endl;
     }
     return 0;
 }
-
