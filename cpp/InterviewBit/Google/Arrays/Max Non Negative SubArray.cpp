@@ -1,21 +1,19 @@
-//  HAS ERROR
-
-vector<int> Solution::maxset(vector<int> &v) {
-    vector<int> temp;
-    vector<int> ans;
-    long long int smallSum=0, maxSum=INT_MIN;
-    for(int i=0;i<v.size();i++){
-        if(v[i]<0){ //when -ve encountered, check if current sum is larger than maxSUM
-            if(smallSum>maxSum){
-                maxSum = smallSum;
+vector<int> Solution::maxset(vector<int> &a) {
+    vector<int> temp,ans;
+    long long int maxl = INT_MIN,maxSum=INT_MIN,sum=0;
+    for(int i=0;i<a.size();i++){
+        if(a[i]>=0){
+            temp.push_back(a[i]);
+            sum+=a[i];
+            if(sum>maxSum || (sum==maxSum && temp.size() > ans.size())){
+                maxSum = sum;
+                ans.clear();
                 ans = temp;
-                temp.clear();
-                smallSum=0;
             }
         }
-        else{
-            temp.push_back(v[i]);
-            smallSum+=v[i];
+        else if(a[i]<0) {
+            temp.clear();
+            sum = 0;
         }
     }
     return ans;
