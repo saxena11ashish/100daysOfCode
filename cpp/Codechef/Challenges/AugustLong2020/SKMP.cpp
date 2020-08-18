@@ -7,16 +7,13 @@ int main(){
     while(t--){
         cin>>s>>p;
         string ans = "";
-        int a[26]={0}, patternFirstAlphaCount=1;
+        int a[26]={0};
         bool patternPlaced = false, p0IsSmallest = true;
         for(char &c: s)a[c-97]++;
         for(char &c: p)a[c-97]--;
         for(int i=1;i<p.size();i++){
-            if(p[i]==p[0])
-                patternFirstAlphaCount++;
-            else{
-                if(p[i] < p[0])
-                    p0IsSmallest = false;
+            if(p[i] < p[0]){
+                p0IsSmallest = false;
                 break;
             }
         }
@@ -25,15 +22,12 @@ int main(){
             if(!patternPlaced){
                 if(p[0]-97 > i)
                     ans+=temp;
-                else if(p[0]-97 < i){
+                else if(p[0]-97 < i || !p0IsSmallest){
                     ans = ans+ p + temp;
                     patternPlaced = true;
                 }
                 else{
-                    if(p0IsSmallest)
-                        ans = ans + temp + p;
-                    else
-                        ans = ans+ p + temp;
+                    ans = ans + temp + p;
                     patternPlaced = true;
                 }
             }
