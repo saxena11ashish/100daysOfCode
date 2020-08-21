@@ -1,3 +1,9 @@
+//  Given a string s, tell how many substrings should this s be split into, in order to make it a good string.
+//  A good string is defined as either a non-increasing or a non-decreasing string.
+//
+//  Example: I/P -> abcfdeghazx
+//           O/P -> 4   (abcf degh az x)
+
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
