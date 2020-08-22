@@ -24,27 +24,68 @@ void printLL(Node* head){
     cout<<endl;
 }
 Node* sortLL(Node *head){
+    if(head ==NULL || head->next==NULL)return head;
+    Node *prev=NULL, *curr=head, *ahead=NULL, *positive=NULL, *tail=NULL;
+    while(curr!=NULL){
+        if(curr->data>=0){
+            if(prev!=NULL){
+                if(tail!=head){
+                    tail->next = head;
+                }
+                else{
+                    tail->next = curr;
 
-    return ___;
-}
-int main(){
-    Node *head = NULL, *tail = NULL;
-    int n,x;
-    cout<<"Enter size of LL: ";cin>>n;
-    cout<<"Enter n values of LL: ";
-    while(n--){
-        cin>>x;
-        if(!head){
-            head = new Node(x);
-            tail = head;
+                }
+                head=prev;
+                if(curr && positive)
+                    positive->next=curr;
+                prev=NULL;
+                tail=NULL;
+            }
+            positive=curr;
+            curr=curr->next;
         }
+
         else{
-            tail->next = new Node(x);
-            tail = tail->next;
+            if(positive)positive->next = NULL;
+            tail=curr;
+            while(curr!=NULL && curr->data < 0){
+                ahead=curr->next;
+                curr->next=prev;
+                prev=curr;
+                curr=ahead;
+            }
         }
     }
-    printLL(head);
-    head = sortLL(head);
-    printLL(head);
+    if(prev!=NULL){
+        if(head!=tail)
+            tail->next=head;
+        head=prev;
+    }
+    return head;
+}
+int main(){
+    cout<<"Enter testCases: ";
+    int t;cin>>t;
+    while(t--){
+        Node *head = NULL, *tail = NULL;
+        int n,x;
+        cout<<"Enter size of LL: ";cin>>n;
+        cout<<"Enter n values of LL: ";
+        while(n--){
+            cin>>x;
+            if(!head){
+                head = new Node(x);
+                tail = head;
+            }
+            else{
+                tail->next = new Node(x);
+                tail = tail->next;
+            }
+        }
+        printLL(head);
+        head = sortLL(head);
+        printLL(head);
+    }
     return 0;
 }
