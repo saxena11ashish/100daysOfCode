@@ -17,37 +17,50 @@ int nthRoot(int A, int N)
     double delX = INT_MAX; 
     double xK;
     while (delX > eps){ 
-        xK = ((N - 1.0) * xPre + 
-              (double)A/pow(xPre, N-1)) / (double)N; 
+        xK = ((N - 1.0) * xPre + (double)A/pow(xPre, N-1)) / (double)N; 
         delX = abs(xK - xPre); 
         xPre = xK; 
     } 
     return int(xK); 
-} 
-
+}
 
 void func(){
-	int a[]={1,2,3,3,3};
-	deba(a);
+	int n;cin>>n;
+	vector<lli> v;
+	lli temp;
+	int nn=n;while(nn--){
+		cin>>temp;
+		v.push_back(temp);
+	}
+	sort(v.begin(), v.end());
+	// deba(v);
+	lli ans=(v[0] == 1 ? 0 : v[0]-1);
+
+	int size = v.size();
+	int x = nthRoot(v.back(),size-1);
+	temp = pow(x,size-1);deb(temp);
+	if(temp != v.back()){
+		ans+= abs(temp - v.back());
+	}
+	for(int i=size-2;i>0;i--){
+		temp/=x;
+		ans+= abs(temp - v[i]);
+	}
+	deb(temp);
+	// cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------------//
 int main(){
+fastIO
+#ifndef ONLINE_JUDGE
+	freopen("/home/ashish/CPP/testing/inp.txt","r",stdin);
+   	freopen("/home/ashish/CPP/testing/out.txt","w",stdout);
+#endif
 
-	// deb(x);
-	int a = 1000000000 - 999950884;
-	a+= (1000000000-1);
-	a+= (1000000000- sqrt(999950884));
-	deb(a);
-// fastIO
-// #ifndef ONLINE_JUDGE
-// 	freopen("/home/ashish/CPP/testing/inp.txt","r",stdin);
-//    	freopen("/home/ashish/CPP/testing/out.txt","w",stdout);
-// #endif
-
-// 	int t=1;
-// 	cin>>t;
-// 	while(t--){
-// 		func();
-// 	}
+	int t=1;
+	// cin>>t;
+	while(t--){
+		func();
+	}
 }
