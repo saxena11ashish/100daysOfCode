@@ -10,14 +10,43 @@ using namespace std;
 
 //----------------------------------------------------------------------//
 
+lli help(lli n){
+	lli k=2;
+	lli C[k+1]; 
+    memset(C, 0, sizeof(C)); 
+  
+    C[0] = 1;  // nC0 is 1 
+  
+    for (lli i = 1; i <= n; i++){
+        for (lli j = min(i, k); j > 0; j--) 
+            C[j] = C[j] + C[j-1]; 
+    } 
+    return C[k];
+}
+
 void func(){
 	lli n;cin>>n;
-	if(n*(n+1)/2 %2!=0){
+	lli seqSum=0;
+	if(n%2==0)
+		seqSum = (n/2)*(n+1);
+	else
+		seqSum = n*((n+1)/2);
+	if(n<3 || seqSum %2!=0){
 		cout<<0<<endl;
 		return;
 	}
-	
-		
+	lli x = n;
+	lli temp = 0;
+	while(temp < seqSum/2){
+		temp += x;
+		x--;
+	}
+	lli ans = n-x;
+	lli a=x,b=n-x;
+	// deb2(n,x);
+	if(temp == seqSum/2)
+		ans = ans + help(a)+help(b);
+	cout<<ans<<endl;
 }
 
 //----------------------------------------------------------------------//
