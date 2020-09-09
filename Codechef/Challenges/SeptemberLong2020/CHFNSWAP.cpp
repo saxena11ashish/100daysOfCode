@@ -11,17 +11,7 @@ using namespace std;
 //----------------------------------------------------------------------//
 
 lli help(lli n){
-	lli k=2;
-	lli C[k+1]; 
-    memset(C, 0, sizeof(C)); 
-  
-    C[0] = 1;  // nC0 is 1 
-  
-    for (lli i = 1; i <= n; i++){
-        for (lli j = min(i, k); j > 0; j--) 
-            C[j] = C[j] + C[j-1]; 
-    } 
-    return C[k];
+    return (n*(n-1))/2;
 }
 
 void func(){
@@ -37,6 +27,25 @@ void func(){
 	}
 	lli x = n;
 	lli temp = 0;
+	int tt=1000000000;
+	
+	// deb(smallSum);
+	while(tt>1){
+		lli sum_x = (x*(x+1))/2;
+		lli sum_xmt = ((x-tt)*((x-tt)+1))/2;
+		lli smallSum = sum_x - sum_xmt;
+		while(x>tt && temp+smallSum < seqSum/2){
+
+			temp += smallSum;
+			sum_x = sum_xmt;
+			x-=tt;
+			sum_xmt = ((x-tt)*((x-tt)+1))/2;
+			smallSum = sum_x - sum_xmt;
+			// deb2(sum_xmt,sum_x);
+		}	
+		tt/=10;
+	}
+	
 	while(temp < seqSum/2){
 		temp += x;
 		x--;

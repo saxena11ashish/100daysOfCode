@@ -12,15 +12,25 @@ using namespace std;
 
 void func(){
 	int n;cin>>n;
-	vector<int>v(n);
-	for(int i=0;i<n;i++)cin>>v[i];
-	int even=0,odd=0;
-	for(int i=0;i<n;i++){
-		if(v[i]==0)continue;
-		if(i%2==0)
+	vector<int> a(n);
+	for(int i=0;i<n;i++)cin>>a[i];
+	int sum = accumulate(a.begin(), a.end(),0);
+	if(sum<=n/2){
+		cout<<n/2<<endl;
+		for(int i=0;i<n/2;i++)cout<<0<<" ";
 	}
-	
- 
+	else{
+		for(int i=0;i<a.size();){
+			if(a[i]==0)
+				a.erase(a.begin()+i);
+			else i++;
+		}
+		if(a.size()%2!=0)
+			a.pop_back();
+		cout<<a.size()<<endl;
+		for(int i:a)cout<<i<<" ";
+	}
+	cout<<endl;
 }
 
 //----------------------------------------------------------------------//
