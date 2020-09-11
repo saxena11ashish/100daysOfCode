@@ -14,7 +14,12 @@ void func1(){
 	bset.reset();
 	int n;cin>>n;
 	int cn=n;
-	lli sum = (n*(n+1))/2;
+	lli sum;
+	if(n%2 == 0)
+		sum = (n/2)*(n+1);
+	else
+		sum = n*((n+1)/2);
+	// lli sum = (n*(n+1))/2;
 	// (sum);
 	if(n==1)
 		cout<<1<<endl<<1;
@@ -29,7 +34,8 @@ void func1(){
 			sum-=n;
 			n--;
 		}
-		bset[sum]=1;
+		if(sum>0)
+			bset[sum]=1;
 		for(int i=1;i<=cn;i++)		//0,1 represents people to which pile is assigned
 		 	cout<<bset[i];
 	}
