@@ -11,12 +11,20 @@ using namespace std;
 //----------------------------------------------------------------------//
 
 void func(){
-	string s[]={"83","83 83","83 83 69","83 83 69 67","83 83 69","83 83","83"};
 	int n;cin>>n;
-	n>7 ? n%=7:1;
-	if(n==-1)
-		cout<<"";
-	cout<<s[--n]<<endl;
+	if(n<1)
+		n+=7;
+	else if(n>7)
+		n%=7;
+	switch(n){
+		case 7:
+		case 1:cout<<83<<endl;break;
+		case 6:
+		case 2:cout<<83<<" "<<83<<endl;break;
+		case 5:
+		case 3:cout<<83<<" "<<83<<" "<<69<<endl;break;
+		case 4:cout<<83<<" "<<83<<" "<<69<<" "<<67<<endl;break;
+	}
 }
 
 //----------------------------------------------------------------------//
@@ -27,10 +35,11 @@ fastIO
    	freopen("/home/ashish/CPP/out.txt","w",stdout);
 #endif
 
-	int t=1;
-	// cin>>t;
-	while(t--){
-		// func();
+	int t='E';
+	cout<<t;
+	cin>>t;
+	while(t>0){
+		func();
+		t--;
 	}
-	cout<<stoi("102");
 }

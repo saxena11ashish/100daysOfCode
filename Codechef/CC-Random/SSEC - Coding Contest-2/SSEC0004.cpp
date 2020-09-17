@@ -19,8 +19,8 @@ bool comp(string a,string b){
 	d1=a.substr(0,v[0]);
 	m1=a.substr(v[0]+1,v[1]-(v[0]+1));
 	y1=a.substr(v[1]+1);
-	// deb2(d1,m1);
-	// deb(y1);
+	deb2(d1,m1);
+	deb(y1);
 	v.clear();
 	for(int i=0;i<b.size();i++){
 		if(b[i]=='/')
@@ -29,10 +29,13 @@ bool comp(string a,string b){
 	d2=b.substr(0,v[0]);
 	m2=b.substr(v[0]+1,v[1]-(v[0]+1));
 	y2=b.substr(v[1]+1);
-	if(y1 != y2)
+	if(y1 != y2){
+		cout<<" compairing years "<<y1<<" and "<<y2<<endl;
 		return y1 < y2;
-	if(m1 != m2)
+	}
+	if(y1==y2 && m1 != m2)
 		return m1 < m2;
+	if(y1==y2 && m1 != m2 && d1!=d2 )
 	return d1 < d2;
 }
 void func(){
