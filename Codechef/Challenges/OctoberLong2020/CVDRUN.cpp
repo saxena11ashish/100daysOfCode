@@ -13,22 +13,22 @@ using namespace std;
 void func(){
 	int n,k,x,y;
 	cin>>n>>k>>x>>y;
-	if(k==0 && x!=y){
-		cout<<"No\n";
-		return;
-	}
 	k = k%n;
-	int temp = n/k, temp_x = x;
-	for(int i=0;i<temp;i++){
-		temp_x = (temp_x+k) % n;
-		if(temp_x == y){
-			cout<<"Yes\n";
-			return;	
+	bool ans = false;
+	if(x == y){
+		ans = true;
+	}
+	else if(k != 0){
+		int temp = n;
+		while(temp--){
+			x = (x + k)%n;
+			if(x == y){
+				ans = true;
+				break;
+			}
 		}
 	}
-	if(temp_x == x)
-		cout<<"No\n";
-	else cout<<"Yes\n";
+	cout<<(ans ? "YES\n" : "NO\n");
 }
 
 //----------------------------------------------------------------------//
