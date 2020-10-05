@@ -11,9 +11,13 @@ using namespace std;
 //----------------------------------------------------------------------//
 
 void func(){
-    int a[]={19,81,2,41,61,59,28,69,76,88};
-    sort(a,a+10);
-    deba(a);
+    int a[620721];
+    for(int i=0;i<620721;i++)
+        cin>>a[i];
+    for(int i=0;i<620720;i++)
+        if((a[i]&a[i+1]) == 0)
+            cout<<" : ";
+    // deba(a);
 }
 
 //----------------------------------------------------------------------//
@@ -23,10 +27,25 @@ fastIO
     freopen("/home/ashish/CPP/inp.txt","r",stdin);
        freopen("/home/ashish/CPP/out.txt","w",stdout);
 #endif
-
+    cout<<(2&1);
     int t=1;
     // cin>>t;
     while(t--){
-        func();
+        // func();
     }
+    // int x=1;
+    // while(x*2<1000000)
+    //     x*=2;
+    // cout<<x;
+    // int y = 524288;
+    // int count=0;
+    // // while(y!=1){
+    // //     y/=2;
+    // //     count++;
+    // // }
+    // deb(count);
+    // cout<<y*2;
+    // 524288
+    // count = 0
+    // 1048576
 }
